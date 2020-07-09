@@ -12,8 +12,8 @@ describe DockingStation do
   #   expect(subject.dock(bike).release_bike).to be_working
   # end
 
-  it '#docks a bike' do
-    bike = Bike.new
-    expect(subject.dock(bike)).to eq(bike)
+  it 'fails to dock a bike' do
+    20.times { subject.dock Bike.new }
+    expect{subject.dock(Bike.new)}.to raise_error("There are no spaces available")
   end
 end
