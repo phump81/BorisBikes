@@ -13,7 +13,15 @@ describe DockingStation do
   # end
 
   it 'fails to dock a bike' do
-    20.times { subject.dock Bike.new }
+    DockingStation::DEFAULT_CAPACITY.times { subject.dock Bike.new }
     expect{subject.dock(Bike.new)}.to raise_error("There are no spaces available")
+  end
+
+  describe '#initialize' do
+    it 'change the capacity of the docking station' do
+      docking_station = DockingStation.new(12)
+      12.times { docking_station.dock(Bike.new) }
+      expect{docking_station.dock(Bike.new)}.to raise_error("There are no spaces available")
+    end
   end
 end
